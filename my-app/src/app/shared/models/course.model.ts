@@ -1,12 +1,4 @@
-export class Course implements ICourse {
-  id: string;
-  title: string;
-  creationDate: Date;
-  duration: Date | number;
-  description: string;
-}
-
-export interface ICourse {
+export interface Course {
   id: string;
   title: string;
   creationDate: Date;

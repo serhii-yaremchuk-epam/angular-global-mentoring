@@ -57,7 +57,8 @@
         "allow-leading-underscore",
         "allow-pascal-case"
       ]
-    }
+    },
+    "no-any": true
   },
   "rulesDirectory": ["codelyzer"]
 }
