@@ -1,0 +1,29 @@
+<div class="course-item card">
+  <div class="course-item__header justify--space-between">
+    <h3 class="course-item__title">{{course.title}}</h3>
+    <div class="course-item__dates">
+      <span class="vertical-align--center">
+        <i class="material-icons">access_time</i>
+        {{course.duration | duration}}
+      </span>
+      <span class="vertical-align--center">
+        <i class="material-icons">calendar_today</i>
+        {{course.creationDate | date:'shortDate'}}
+      </span>
+    </div>
+  </div>
+  <div class="course-item__content course-item-content justify--space-between">
+    <div class="course-item-content__description">
+      {{course.description}}
+    </div>
+    <div class="course-item-content__actions course-item-actions justify--space-between">
+      <button class="custom-button course-item-actions__button custom-button--color-blue custom-button--color-blue custom-button--size-s">
+        <i class="material-icons">edit</i>Edit
+      </button>
+      <button (click)="onDelete()"
+              class="custom-button course-item-actions__button custom-button--color-blue custom-button--color-blue custom-button--size-s">
+        <i class="material-icons">delete</i>Delete
+      </button>
+    </div>
+  </div>
+</div>
