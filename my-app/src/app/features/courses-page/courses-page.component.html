@@ -1,1 +1,27 @@
-<p>courses-page works!</p>
+<div class="courses-page">
+  <div class="courses-page__header justify--space-between">
+    <div class="courses-page-search">
+      <input [(ngModel)]="searchQuery"
+             class="courses-page-search__input"
+             type="text"
+             placeholder="Type to search">
+      <button (click)="onFind()"
+              class="courses-page-search__button custom-button custom-button--color-green">
+        Search
+      </button>
+    </div>
+    <button class="courses-page__add-button custom-button custom-button--color-blue">
+      <i class="material-icons">add_circle_outline</i>
+      <span>Add course</span>
+    </button>
+  </div>
+  <div class="courses-page__items-container">
+    <cp-courses-item *ngFor="let course of courses" [course]="course"
+                     (delete)="onDelete($event)"
+                     class="course-item">
+    </cp-courses-item>
+  </div>
+  <div class="courses-page__load-more card justify--center vertical-align--center">
+    <a class="cursor--pointer" (click)="onLoadMore()">Load more</a>
+  </div>
+</div>

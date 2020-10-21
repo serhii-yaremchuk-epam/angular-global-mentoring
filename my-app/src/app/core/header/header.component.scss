@@ -1,0 +1,10 @@
+.header {
+  background: #303240;
+  height: 60px;
+
+  &__user-buttons {
+    .custom-button {
+      margin-left: 10px;
+    }
+  }
+}

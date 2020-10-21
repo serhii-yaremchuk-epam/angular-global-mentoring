@@ -1,0 +1,29 @@
+.courses-page {
+  &__header {
+    margin-bottom: 17px;
+  }
+
+  &__add-button {
+    margin-top: 30px;
+  }
+
+  &__items-container {
+    > .course-item {
+      display: block;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__load-more {
+    height: 36px;
+  }
+}
+
+.courses-page-search {
+  display: flex;
+
+  &__input {
+    width: 240px;
+    margin-right: 12px;
+  }
+}

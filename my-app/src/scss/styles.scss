@@ -1,0 +1,104 @@
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '../../node_modules/material-icons/iconfont/material-icons';
+@import 'fonts';
+
+html,
+body {
+  height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+}
+
+body, input, textarea, button {
+  font-size: 14px;
+  font-family: "SourceSansPro-Regular";
+}
+
+input {
+  height: 16px;
+  padding: 9px 12px;
+  border: 1px solid #ced0db;
+  border-radius: 3px;
+
+  &::placeholder {
+    color: #ACAFBF;;
+  }
+}
+
+.layout-padding {
+  padding-left: 85px;
+  padding-right: 85px;
+}
+
+.custom-button {
+  min-width: 80px;
+  height: 36px;
+  border-radius: 3px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  i {
+    margin-right: 5px;
+  }
+
+  &--unclickable {
+    cursor: default;
+  }
+
+  &--color {
+    &-green {
+      background-color: #67A300 ;
+    }
+    &-blue {
+      background-color: #009ECC;
+    }
+  }
+
+  &--size {
+    &-s {
+      padding: 6px 9px;
+      font-size: 12px;
+      height: 24px;
+      min-width: 60px;
+
+      .material-icons {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.vertical-align--center {
+  display: flex;
+  align-items: center;
+}
+
+.justify--space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.justify--center {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: white;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 6px;
+}
+
+.cursor--pointer {
+  cursor: pointer;
+}
