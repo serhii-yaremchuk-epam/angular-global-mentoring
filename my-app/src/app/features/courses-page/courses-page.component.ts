@@ -7,8 +7,8 @@ import {Course} from '../../shared/models/course.model';
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit {
-  public searchQuery = '';
-  public courses!: Course[];
+  searchQuery = '';
+  courses!: Course[];
 
   constructor() { }
 

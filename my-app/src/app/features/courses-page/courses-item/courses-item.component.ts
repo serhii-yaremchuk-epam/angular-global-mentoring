@@ -20,7 +20,8 @@ import {Course} from '../../../shared/models/course.model';
 })
 export class CoursesItemComponent implements OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
   @Input() course!: Course;
-  @Output() delete: EventEmitter<Course> = new EventEmitter<Course>();
+
+  @Output() delete = new EventEmitter<Course>();
 
   constructor() { }
 
