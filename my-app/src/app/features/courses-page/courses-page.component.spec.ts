@@ -28,10 +28,6 @@ describe('CoursesPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
   it('should initialize courses', () => {
     expect(component.courses[0].title).toEqual('Video Course 1. Name tag');
     expect(component.courses[1].title).toEqual('Video Course 2. Name tag');
