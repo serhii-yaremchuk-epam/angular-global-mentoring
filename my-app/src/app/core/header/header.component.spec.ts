@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import { FakeLogoComponent } from './fake-logo/fake-logo.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +10,11 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      declarations: [
+        HeaderComponent,
+        FakeLogoComponent,
+        BreadcrumbsComponent
+      ]
     })
     .compileComponents();
   });

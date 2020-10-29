@@ -10,8 +10,6 @@ export class CoursesPageComponent implements OnInit {
   searchQuery = '';
   courses!: Course[];
 
-  constructor() { }
-
   ngOnInit(): void {
     this.courses = [
       {
