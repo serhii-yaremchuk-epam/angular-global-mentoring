@@ -1,7 +1,4 @@
 .course-item {
-  padding-top: 10px;
-  padding-bottom: 25px;
-
   &__dates {
     display: flex;
     color: #858997;
@@ -14,6 +11,11 @@
         font-size: 20px;
       }
     }
+  }
+
+  &__top-rated-star {
+    margin-left: 5px;
+    color: orange;
   }
 
   &-content {

@@ -5,6 +5,8 @@ import { CoursesItemComponent } from './courses-item/courses-item.component';
 import { FormsModule } from '@angular/forms';
 import { DurationPipe } from '../../shared/pipes/duration.pipe';
 import { Course } from '../../shared/models/course.model';
+import { OrderByPipe } from '../../shared/pipes/order-by.pipe';
+import { FreshIndicatorDirective } from '../../shared/directives/fresh-indicator.directive';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -16,7 +18,9 @@ describe('CoursesPageComponent', () => {
       declarations: [
         CoursesPageComponent,
         CoursesItemComponent,
-        DurationPipe
+        DurationPipe,
+        OrderByPipe,
+        FreshIndicatorDirective
       ]
     })
       .compileComponents();
@@ -29,14 +33,14 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should initialize courses', () => {
-    expect(component.courses[0].title).toEqual('Video Course 1. Name tag');
-    expect(component.courses[1].title).toEqual('Video Course 2. Name tag');
-    expect(component.courses[2].title).toEqual('Video Course 3. Name tag');
+    expect(component.courses[0].title).toEqual('Video Course 2. Name tag');
+    expect(component.courses[1].title).toEqual('Video Course 3. Name tag');
+    expect(component.courses[2].title).toEqual('Video Course 1. Name tag');
   });
 
-  it('onFind should log searchQuery', () => {
+  it('onFind should filter courses', () => {
     // arrange
-    const testQuery = 'test';
+    const testQuery = 'course 2';
     component.searchQuery = testQuery;
     spyOn(console, 'log');
 
@@ -44,7 +48,8 @@ describe('CoursesPageComponent', () => {
     component.onFind();
 
     // assert
-    expect(console.log).toHaveBeenCalledWith(testQuery);
+    expect(component.courses.length).toEqual(1);
+    expect(component.courses[0].title).toEqual('Video Course 2. Name tag');
   });
 
   it('onLoadMore should log proper data', () => {

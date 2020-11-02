@@ -1,6 +1,9 @@
-<div class="course-item card">
+<div class="course-item">
   <div class="course-item__header justify--space-between">
-    <h3 class="course-item__title">{{course.title}}</h3>
+    <h3 class="course-item__title vertical-align--center">
+      {{course.title | uppercase}}
+      <i *ngIf="course.topRated" class="course-item__top-rated-star material-icons">star_rate</i>
+    </h3>
     <div class="course-item__dates">
       <span class="vertical-align--center">
         <i class="material-icons">access_time</i>

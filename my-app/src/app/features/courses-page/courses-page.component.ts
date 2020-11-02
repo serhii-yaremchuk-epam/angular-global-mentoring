@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Course} from '../../shared/models/course.model';
+import { Course } from '../../shared/models/course.model';
+import { FilterPipe } from '../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'cp-courses-page',
@@ -8,10 +9,16 @@ import {Course} from '../../shared/models/course.model';
 })
 export class CoursesPageComponent implements OnInit {
   searchQuery = '';
+  initialCourses!: Course[];
   courses!: Course[];
 
   ngOnInit(): void {
-    this.courses = [
+    const courseDate1 = new Date();
+    const courseDate2 = new Date();
+    courseDate1.setDate(courseDate1.getDate() - 10);
+    courseDate2.setDate(courseDate2.getDate() + 10);
+
+    this.initialCourses = this.courses = [
       {
         id: '1',
         title: 'Video Course 1. Name tag',
@@ -19,8 +26,9 @@ export class CoursesPageComponent implements OnInit {
           'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
           'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
           'all courses offered during a particular semester.',
-        creationDate:  new Date(2020,10,4),
-        duration: 3805
+        creationDate: courseDate1,
+        duration: 3805,
+        topRated: true
       },
       {
         id: '2',
@@ -29,8 +37,8 @@ export class CoursesPageComponent implements OnInit {
           'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
           'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
           'all courses offered during a particular semester.',
-        creationDate:  new Date(20,10,5),
-        duration: 4805
+        creationDate: courseDate2,
+        duration: 600
       },
       {
         id: '3',
@@ -39,14 +47,14 @@ export class CoursesPageComponent implements OnInit {
           'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
           'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
           'all courses offered during a particular semester.',
-        creationDate:  new Date(20,10,8),
+        creationDate: new Date(2020, 10, 8),
         duration: 5805
       }
     ];
   }
 
   onFind() {
-    console.log(this.searchQuery);
+    this.courses = (new FilterPipe()).transform(this.initialCourses, this.searchQuery);
   }
 
   onLoadMore() {

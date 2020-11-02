@@ -15,12 +15,20 @@
       <span>Add course</span>
     </button>
   </div>
-  <div class="courses-page__items-container">
-    <cp-courses-item *ngFor="let course of courses" [course]="course"
+  <div class="courses-page__items-container" *ngIf="this.courses && this.courses.length; else noResults">
+    <cp-courses-item *ngFor="let course of courses | orderBy: 'creationDate':false" [course]="course"
+                     [ngClass]="{'course-item': true, 'top-rated': course.topRated, card: true}"
+                     cpFreshIndicator
+                     [creationDate]="course.creationDate"
                      (delete)="onDelete($event)"
                      class="course-item">
     </cp-courses-item>
   </div>
+  <ng-template #noResults>
+    <div class="courses-page__no-results card justify--center vertical-align--center">
+      No data. Fill free to add new course
+    </div>
+  </ng-template>
   <div class="courses-page__load-more card justify--center vertical-align--center">
     <a class="cursor--pointer" (click)="onLoadMore()">Load more</a>
   </div>
