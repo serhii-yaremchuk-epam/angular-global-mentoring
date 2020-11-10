@@ -17,6 +17,13 @@
   &__load-more {
     height: 36px;
   }
+
+  &__no-results {
+    height: 100px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-family: "SourceSansPro-Bold";
+  }
 }
 
 .courses-page-search {
@@ -25,5 +32,14 @@
   &__input {
     width: 240px;
     margin-right: 12px;
+  }
+}
+
+cp-courses-item {
+  padding-top: 10px;
+  padding-bottom: 25px;
+
+  &.top-rated {
+    background-color: lightgray;
   }
 }

@@ -1,14 +1,9 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   Output,
   EventEmitter,
-  DoCheck,
-  OnChanges,
-  AfterContentInit,
-  AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, SimpleChanges
 } from '@angular/core';
 import {Course} from '../../../shared/models/course.model';
 
