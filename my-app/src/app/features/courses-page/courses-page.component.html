@@ -15,8 +15,8 @@
       <span>Add course</span>
     </button>
   </div>
-  <div class="courses-page__items-container" *ngIf="this.courses && this.courses.length; else noResults">
-    <cp-courses-item *ngFor="let course of courses | orderBy: 'creationDate':false" [course]="course"
+  <div class="courses-page__items-container" *ngIf="courses?.length; else noResults">
+    <cp-courses-item *ngFor="let course of courses | orderBy:'creationDate':false" [course]="course"
                      [ngClass]="{'course-item': true, 'top-rated': course.topRated, card: true}"
                      cpFreshIndicator
                      [creationDate]="course.creationDate"
