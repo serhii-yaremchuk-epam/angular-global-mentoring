@@ -1,0 +1,21 @@
+<div class="login-page vertical-align--center justify--center">
+  <div class="card login-page__form login-form">
+    <h2 class="login-form__title">Login</h2>
+    <div class="login-form__control">
+      <label for="email-input">E-mail</label>
+      <input id="email-input"
+             type="text"
+             placeholder="Enter e-mail">
+    </div>
+    <div class="login-form__control">
+      <label for="password-input">Password</label>
+      <input id="password-input"
+             type="text"
+             placeholder="Enter password">
+    </div>
+    <div class="login-form__actions login-form-actions justify--space-between vertical-align--center">
+      <a class="login-form-actions__forgot-password" href="">Forgot password</a>
+      <button class="custom-button custom-button--color-blue" (click)="login()">Login</button>
+    </div>
+  </div>
+</div>

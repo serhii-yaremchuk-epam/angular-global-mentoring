@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { FakeLogoComponent } from './header/fake-logo/fake-logo.component';
-import { BreadcrumbsComponent } from './header/breadcrumbs/breadcrumbs.component';
-import {RouterModule} from '@angular/router';
+import { HeaderComponent } from './ui/header/header.component';
+import { FakeLogoComponent } from './ui/header/fake-logo/fake-logo.component';
+import { BreadcrumbsComponent } from './ui/header/breadcrumbs/breadcrumbs.component';
+import { RouterModule } from '@angular/router';
+import { FooterComponent } from './ui/footer/footer.component';
+import { LoginPageComponent } from './ui/login-page/login-page.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {RouterModule} from '@angular/router';
     HeaderComponent,
     FooterComponent,
     FakeLogoComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    LoginPageComponent
   ],
   exports: [
     HeaderComponent,

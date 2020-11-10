@@ -1,0 +1,36 @@
+.login-page {
+  height: 100%;
+
+  &__form {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 368px;
+  }
+}
+
+.login-form {
+  &__title {
+    margin: 0 0 30px 0;
+  }
+
+  &__control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    label {
+      margin-bottom: 8px;
+      font-family: 'SourceSansPro-Bold';
+    }
+  }
+
+  &__actions {
+    margin-top: 24px
+  }
+}
+
+.login-form-actions {
+  &__forgot-password {
+    font-size: 12px;
+  }
+}
