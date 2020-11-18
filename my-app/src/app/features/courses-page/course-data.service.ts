@@ -6,7 +6,7 @@ import { Course } from '../../shared/models/course.model';
 })
 export class CourseDataService {
 
-  private static courses = [
+  private static courses: Course[] = [
     {
       id: '1',
       title: 'Video Course 1. Name tag',

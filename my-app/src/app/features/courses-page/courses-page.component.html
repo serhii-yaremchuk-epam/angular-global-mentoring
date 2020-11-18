@@ -10,10 +10,10 @@
         Search
       </button>
     </div>
-    <button class="courses-page__add-button custom-button custom-button--color-blue">
+    <a [routerLink]="'/course/create'" class="courses-page__add-button custom-button custom-button--color-blue">
       <i class="material-icons">add_circle_outline</i>
       <span>Add course</span>
-    </button>
+    </a>
   </div>
   <div class="courses-page__items-container" *ngIf="courses?.length; else noResults">
     <cp-courses-item *ngFor="let course of courses | orderBy:'creationDate':false" [course]="course"

@@ -30,7 +30,7 @@ export class CoursesPageComponent implements OnInit {
 
   onDelete(course: Course) {
     if (confirm('Do you really want to delete this course?')) {
-      this.courseDataService.removeCourse(course.id);
+      this.courseDataService.removeCourse(course.id as string);
     }
   }
 

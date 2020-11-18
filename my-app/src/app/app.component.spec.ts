@@ -2,9 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/ui/header/header.component';
-import { FooterComponent } from './core/footer/footer.component';
 import { FakeLogoComponent } from './core/ui/header/fake-logo/fake-logo.component';
 import { BreadcrumbsComponent } from './core/ui/header/breadcrumbs/breadcrumbs.component';
+import { FooterComponent } from './core/ui/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

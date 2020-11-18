@@ -1,0 +1,25 @@
+<div class="card form-page">
+  <h2 class="form-page__title">New course</h2>
+  <form>
+    <div class="form-item">
+      <label for="title">Title</label>
+      <input id="title" name="title" placeholder="Text input"
+             [ngModel]="course.title">
+    </div>
+    <div class="form-item">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Add description"
+                [ngModel]="course.description"></textarea>
+    </div>
+    <div class="form-item form-item--small">
+      <cp-form-date [date]="course.creationDate"></cp-form-date>
+    </div>
+    <div class="form-item form-item--medium">
+      <cp-form-duration [duration]="course.duration"></cp-form-duration>
+    </div>
+    <div class="form-actions justify--end">
+      <button class="custom-button custom-button--color-gray" (click)="onCancel()">Cancel</button>
+      <button class="custom-button custom-button--color-green" (click)="onSave()">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,48 @@
+.form-page {
+  padding-bottom: 35px;
+
+  &__title {
+    padding: 24px 0;
+  }
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+
+  ::ng-deep label {
+    display: flex;
+    justify-content: space-between;
+    font-family: "SourceSansPro-Bold";
+    margin-bottom: 8px;
+  }
+
+  &.required {
+    label {
+      &:after {
+        content: '*required';
+        color: #474A59;
+        font-size: 12px;
+      }
+    }
+  }
+
+  &--small {
+    width: 150px;
+  }
+
+  &--medium {
+    width: 312px;
+  }
+
+}
+
+.form-actions {
+  margin-top: 29px;
+
+  button {
+    margin-left: 12px;
+    font-family: "SourceSansPro-Bold";
+  }
+}
