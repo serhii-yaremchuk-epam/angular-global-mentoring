@@ -6,6 +6,7 @@ import { BreadcrumbsComponent } from './ui/header/breadcrumbs/breadcrumbs.compon
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './ui/footer/footer.component';
 import { LoginPageComponent } from './ui/login-page/login-page.component';
+import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { LoginPageComponent } from './ui/login-page/login-page.component';
     FooterComponent,
     FakeLogoComponent,
     BreadcrumbsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    PageNotFoundComponent
   ],
   exports: [
     HeaderComponent,

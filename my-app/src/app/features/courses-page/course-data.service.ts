@@ -51,11 +51,14 @@ export class CourseDataService {
     CourseDataService.courses.push(course);
   }
 
-  getCourseById(id: string): Course | undefined {
-    return this.getList().find(courseItem => courseItem.id === id);
+  getCourseById(id: string): Course {
+    return this.getList().find(courseItem => courseItem.id === id) as Course;
   }
 
   updateCourse(id: string, course: Course) {
+    CourseDataService.courses = CourseDataService.courses.map(courseItem => {
+      return courseItem.id === id ? course : courseItem;
+    })
   }
 
   removeCourse(id: string) {

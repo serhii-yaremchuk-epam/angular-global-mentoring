@@ -1,15 +1,16 @@
 <div class="card form-page">
-  <h2 class="form-page__title">New course</h2>
+  <h2 *ngIf="isEditMode" class="form-page__title">Edit course #{{course.id}}</h2>
+  <h2 *ngIf="!isEditMode" class="form-page__title">New course</h2>
   <form>
     <div class="form-item">
       <label for="title">Title</label>
       <input id="title" name="title" placeholder="Text input"
-             [ngModel]="course.title">
+             [(ngModel)]="course.title">
     </div>
     <div class="form-item">
       <label for="description">Description</label>
       <textarea id="description" name="description" placeholder="Add description"
-                [ngModel]="course.description"></textarea>
+                [(ngModel)]="course.description"></textarea>
     </div>
     <div class="form-item form-item--small">
       <cp-form-date [date]="course.creationDate"></cp-form-date>
