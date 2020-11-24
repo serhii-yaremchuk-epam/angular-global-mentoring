@@ -5,7 +5,7 @@
   <div class="header__user-buttons vertical-align--center" *ngIf="authService.isAuthenticated()">
     <div class="custom-button custom-button--unclickable">
       <i class="material-icons">person</i>
-      <span>{{authService.getUserInfo().firstName}} {{authService.getUserInfo().lastName}}</span>
+      <span>{{user.firstName}} {{user.lastName}}</span>
     </div>
     <button class="custom-button" (click)="authService.logout()">
       <i class="material-icons">exit_to_app</i>Log off
