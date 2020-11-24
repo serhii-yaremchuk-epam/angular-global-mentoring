@@ -1,0 +1,8 @@
+<ng-container>
+  <label for="duration">Duration</label>
+  <div class="justify--space-between vertical-align--center">
+    <input id="duration" type="number" name="duration"
+           [(ngModel)]="duration">
+    <span *ngIf="duration">{{duration | duration}}</span>
+  </div>
+</ng-container>

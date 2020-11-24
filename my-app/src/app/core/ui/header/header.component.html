@@ -1,0 +1,15 @@
+<header class="header layout-padding vertical-align--center justify--space-between">
+  <div class="header__logo">
+    <cp-fake-logo></cp-fake-logo>
+  </div>
+  <div class="header__user-buttons vertical-align--center" *ngIf="authService.isAuthenticated()">
+    <div class="custom-button custom-button--unclickable">
+      <i class="material-icons">person</i>
+      <span>{{user.firstName}} {{user.lastName}}</span>
+    </div>
+    <button class="custom-button" (click)="authService.logout()">
+      <i class="material-icons">exit_to_app</i>Log off
+    </button>
+  </div>
+</header>
+<cp-breadcrumbs *ngIf="authService.isAuthenticated()"></cp-breadcrumbs>

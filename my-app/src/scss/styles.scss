@@ -17,8 +17,7 @@ body, input, textarea, button {
   font-family: "SourceSansPro-Regular";
 }
 
-input {
-  height: 16px;
+input, textarea {
   padding: 9px 12px;
   border: 1px solid #ced0db;
   border-radius: 3px;
@@ -26,6 +25,14 @@ input {
   &::placeholder {
     color: #ACAFBF;;
   }
+}
+
+input {
+  height: 16px;
+}
+
+textarea {
+  min-height: 108px;
 }
 
 .layout-padding {
@@ -45,6 +52,7 @@ input {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  text-decoration: none;
 
   i {
     margin-right: 5px;
@@ -60,6 +68,10 @@ input {
     }
     &-blue {
       background-color: #009ECC;
+    }
+    &-gray {
+      background: rgba(18,21,35,0.20);
+      color: #5B616F;
     }
   }
 
@@ -90,6 +102,11 @@ input {
 .justify--center {
   display: flex;
   justify-content: center;
+}
+
+.justify--end {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .card {
