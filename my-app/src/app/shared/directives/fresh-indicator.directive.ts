@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@a
 })
 export class FreshIndicatorDirective implements OnInit {
   private readonly maxNumberOfDaysMs = 1000 * 60 * 60 * 24 * 14;
-  @Input() creationDate!: Date;
+  @Input() date!: Date;
 
   @HostBinding('style.border') border!: string;
 
@@ -15,7 +15,7 @@ export class FreshIndicatorDirective implements OnInit {
 
   changeBorder() {
     const currentTime = (new Date()).getTime();
-    const creationTime = this.creationDate.getTime();
+    const creationTime = (new Date(this.date)).getTime();
 
     if (creationTime < currentTime && creationTime >= currentTime - this.maxNumberOfDaysMs) {
       this.border = '1px solid green';

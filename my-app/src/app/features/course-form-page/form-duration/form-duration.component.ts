@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cp-form-duration',
@@ -8,4 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 })
 export class FormDurationComponent {
   @Input() duration?: number;
+  @Output() durationChange = new EventEmitter<number>();
+
+  onChange() {
+    this.durationChange.emit(this.duration);
+  }
 }

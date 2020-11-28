@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, takeUntil } from 'rxjs/operators';
 import { CourseDataService } from '../courses-page/course-data.service';
@@ -22,7 +22,8 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private courseDataService: CourseDataService,
-    private breadcrumbsService: BreadcrumbsService) {
+    private breadcrumbsService: BreadcrumbsService,
+    private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -47,17 +48,20 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
 
   private initEditMode(id: string) {
     this.isEditMode = true;
-    this.course = this.courseDataService.getCourseById(id);
-    this.breadcrumbsService.setLastLabel(this.course.title);
+    this.courseDataService.getCourseById(id).subscribe(course => {
+      this.course = course;
+      this.breadcrumbsService.setLastLabel(this.course.name);
+      this.cd.markForCheck();
+    });
   }
 
   private initCreateMode() {
     this.isEditMode = false;
     this.course = {
-      title: '',
+      name: '',
       description: '',
-      duration: 0,
-      creationDate: undefined,
+      length: 0,
+      date: new Date(),
     };
   }
 
@@ -66,13 +70,24 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
+    let courseAction$;
     if (this.isEditMode) {
-      this.courseDataService.updateCourse(this.course.id as string, this.course as Course);
+      courseAction$ = this.courseDataService.updateCourse(this.course.id as string, this.course as Course);
     } else {
-      this.courseDataService.createCourse(this.course as Course);
+      courseAction$ = this.courseDataService.createCourse(this.course as Course);
     }
 
-    this.router.navigate(['/courses']);
+    courseAction$.subscribe(course => {
+      this.router.navigate(['/courses']);
+    })
+  }
+
+  onFormDateChange(date: string) {
+    this.course.date = new Date(date);
+  }
+
+  onDurationChange(length: number) {
+    this.course.length = length;
   }
 
   ngOnDestroy() {
@@ -83,8 +98,8 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
 
 interface CourseFormModel {
   id?: string,
-  title: string,
+  name: string,
   description: string,
-  duration: number,
-  creationDate?: Date,
+  length: number,
+  date: Date,
 }

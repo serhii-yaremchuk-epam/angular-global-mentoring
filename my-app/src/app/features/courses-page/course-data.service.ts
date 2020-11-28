@@ -1,73 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../../shared/models/course.model';
+import { CourseApiService } from '../../core/api/course-api.service';
+import { Observable } from 'rxjs';
+import { CoursesListParams } from '../../shared/models/courses-list-params.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseDataService {
-
-  private static courses: Course[] = [
-    {
-      id: '1',
-      title: 'Video Course 1. Name tag',
-      description: 'Learn about where you can find course descriptions, what information they include, how they work, and details ' +
-        'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
-        'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
-        'all courses offered during a particular semester.',
-      creationDate: new Date(),
-      duration: 3805,
-      topRated: true
-    },
-    {
-      id: '2',
-      title: 'Video Course 2. Name tag',
-      description: 'Learn about where you can find course descriptions, what information they include, how they work, and details ' +
-        'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
-        'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
-        'all courses offered during a particular semester.',
-      creationDate: new Date(),
-      duration: 600
-    },
-    {
-      id: '3',
-      title: 'Video Course 3. Name tag',
-      description: 'Learn about where you can find course descriptions, what information they include, how they work, and details ' +
-        'about various components of a course description. Course descriptions report information about a university or college\'s classes. ' +
-        'They\'re published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for ' +
-        'all courses offered during a particular semester.',
-      creationDate: new Date(2020, 10, 8),
-      duration: 5805
-    }
-  ];
-
-  constructor() {
+  constructor(private courseApi: CourseApiService) {
   }
 
-  getList(): Course[] {
-    return CourseDataService.courses;
+  getList(params: CoursesListParams): Observable<Course[]> {
+    return this.courseApi.getCourses(params);
   }
 
-  createCourse(course: Course): void {
-    CourseDataService.courses.push(course);
+  createCourse(course: Course): Observable<Course> {
+    return this.courseApi.createCourse(course);
   }
 
-  getCourseById(id: string): Course {
-    return this.getList().find(courseItem => courseItem.id === id) as Course;
+  getCourseById(id: string): Observable<Course> {
+    return this.courseApi.getById(id);
   }
 
   updateCourse(id: string, course: Course) {
-    CourseDataService.courses = CourseDataService.courses.map(courseItem => {
-      return courseItem.id === id ? course : courseItem;
-    })
+    return this.courseApi.updateCourse(id, course);
   }
 
   removeCourse(id: string) {
-    const idx = this.getList().findIndex(courseItem => courseItem.id === id);
-    if (idx === -1) {
-      return console.error(`Course with id ${id} not found`);
-    }
-
-    CourseDataService.courses.splice(idx, 1);
+    return this.courseApi.removeCourse(id);
   }
 
 }

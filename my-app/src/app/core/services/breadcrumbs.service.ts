@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BreadcrumbsService {
-  private breadcrumbs!: Breadcrumb[];
+  private breadcrumbs: Breadcrumb[] = [];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.router.events

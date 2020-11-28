@@ -9,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
+  email!: string;
+  password!: string;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -19,6 +21,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    this.authService.login();
+    if (!this.email || !this.password) {
+      return;
+    }
+
+    this.authService.login(this.email, this.password);
   }
 }

@@ -39,9 +39,9 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should initialize courses', () => {
-    expect(component.courses[0].title).toEqual('Video Course 1. Name tag');
-    expect(component.courses[1].title).toEqual('Video Course 2. Name tag');
-    expect(component.courses[2].title).toEqual('Video Course 3. Name tag');
+    expect(component.courses[0].name).toEqual('Video Course 1. Name tag');
+    expect(component.courses[1].name).toEqual('Video Course 2. Name tag');
+    expect(component.courses[2].name).toEqual('Video Course 3. Name tag');
   });
 
   it('onFind should filter courses', () => {
@@ -55,7 +55,7 @@ describe('CoursesPageComponent', () => {
 
     // assert
     expect(component.courses.length).toEqual(1);
-    expect(component.courses[0].title).toEqual('Video Course 2. Name tag');
+    expect(component.courses[0].name).toEqual('Video Course 2. Name tag');
   });
 
   it('onLoadMore should log proper data', () => {

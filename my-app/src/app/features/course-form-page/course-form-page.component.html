@@ -5,7 +5,7 @@
     <div class="form-item">
       <label for="title">Title</label>
       <input id="title" name="title" placeholder="Text input"
-             [(ngModel)]="course.title">
+             [(ngModel)]="course.name">
     </div>
     <div class="form-item">
       <label for="description">Description</label>
@@ -13,10 +13,10 @@
                 [(ngModel)]="course.description"></textarea>
     </div>
     <div class="form-item form-item--small">
-      <cp-form-date [date]="course.creationDate"></cp-form-date>
+      <cp-form-date (formDateChange)="onFormDateChange($event)" [date]="course.date"></cp-form-date>
     </div>
     <div class="form-item form-item--medium">
-      <cp-form-duration [duration]="course.duration"></cp-form-duration>
+      <cp-form-duration (durationChange)="onDurationChange($event)" [duration]="course.length"></cp-form-duration>
     </div>
     <div class="form-actions justify--end">
       <button class="custom-button custom-button--color-gray" (click)="onCancel()">Cancel</button>
