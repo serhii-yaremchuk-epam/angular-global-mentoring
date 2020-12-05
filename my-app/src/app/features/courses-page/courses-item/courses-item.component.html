@@ -20,9 +20,10 @@
       {{course.description}}
     </div>
     <div class="course-item-content__actions course-item-actions justify--space-between">
-      <button class="course-item-actions__button custom-button custom-button--color-blue custom-button--size-s">
+      <a class="course-item-actions__button custom-button custom-button--color-blue custom-button--size-s"
+         [routerLink]="[course.id]">
         <i class="material-icons">edit</i>Edit
-      </button>
+      </a>
       <button (click)="onDelete()"
               class="course-item__delete-button course-item-actions__button custom-button custom-button--color-blue custom-button--size-s">
         <i class="material-icons">delete</i>Delete

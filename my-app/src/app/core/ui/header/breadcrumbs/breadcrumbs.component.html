@@ -1,3 +1,9 @@
-<div class="breadcrumbs layout-padding vertical-align--center">
-  Courses
+<div *ngIf="breadcrumbsService.notEmptyBreadcrumbs?.length" class="breadcrumbs layout-padding vertical-align--center">
+  <ng-container *ngFor="let breadcrumb of breadcrumbsService.notEmptyBreadcrumbs; last as isLast">
+    <span *ngIf="!isLast">
+      <a [routerLink]="breadcrumb.url">{{breadcrumb.label}}</a>
+      &nbsp;/&nbsp;
+    </span>
+    <span *ngIf="isLast">{{breadcrumb.label}}</span>
+  </ng-container>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'cp-login-page',
@@ -20,6 +20,5 @@ export class LoginPageComponent implements OnInit {
 
   login() {
     this.authService.login();
-    console.log('Logged in successfully')
   }
 }
