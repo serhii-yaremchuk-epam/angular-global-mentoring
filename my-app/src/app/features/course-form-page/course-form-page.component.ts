@@ -5,6 +5,7 @@ import { CourseDataService } from '../courses-page/course-data.service';
 import { Course } from '../../shared/models/course.model';
 import { Subject } from 'rxjs';
 import { BreadcrumbsService } from '../../core/services/breadcrumbs.service';
+import { CourseFormModel } from '../../shared/models/course-form.model';
 
 @Component({
   selector: 'cp-course-form-page',
@@ -94,12 +95,4 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-}
-
-interface CourseFormModel {
-  id?: string,
-  name: string,
-  description: string,
-  length: number,
-  date: Date,
 }
