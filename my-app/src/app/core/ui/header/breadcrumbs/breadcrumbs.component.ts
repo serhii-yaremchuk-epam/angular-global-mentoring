@@ -7,7 +7,6 @@ import { BreadcrumbsService } from '../../../services/breadcrumbs.service';
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent {
-
   constructor(public breadcrumbsService: BreadcrumbsService) {
   }
 }
