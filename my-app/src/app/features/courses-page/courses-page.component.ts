@@ -3,6 +3,7 @@ import { Course } from '../../shared/models/course.model';
 import { CourseDataService } from './course-data.service';
 import { Subject } from 'rxjs';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'cp-courses-page',
@@ -13,6 +14,8 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   searchQuery = '';
   courses: Course[] = [];
   isLastPage = false;
+
+  private searchChanged$ = new Subject<string>();
 
   private readonly initialListParams: CoursesListParams = {
     start: 0,
@@ -27,9 +30,18 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshList();
+    this.searchChanged$.pipe(
+      filter(searchQuery => {
+        return searchQuery.length >= 3 || searchQuery.length === 0;
+      }),
+      debounceTime(250),
+      distinctUntilChanged(),
+    ).subscribe(() => {
+      this.search();
+    })
   }
 
-  onFind() {
+  search() {
     this.refreshList({textFragment: this.searchQuery});
   }
 
@@ -60,9 +72,14 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  onTypeSearch() {
+    this.searchChanged$.next(this.searchQuery);
+  }
+
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.searchChanged$.complete();
   }
 
 }
