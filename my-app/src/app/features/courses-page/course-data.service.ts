@@ -23,8 +23,8 @@ export class CourseDataService {
     return this.courseApi.getById(id);
   }
 
-  updateCourse(id: string, course: Course) {
-    return this.courseApi.updateCourse(id, course);
+  updateCourse(course: Course) {
+    return this.courseApi.updateCourse(course.id, course);
   }
 
   removeCourse(id: string) {

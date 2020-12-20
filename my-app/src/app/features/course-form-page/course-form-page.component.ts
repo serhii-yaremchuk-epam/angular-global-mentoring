@@ -73,7 +73,7 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
   onSave() {
     let courseAction$;
     if (this.isEditMode) {
-      courseAction$ = this.courseDataService.updateCourse(this.course.id as string, this.course as Course);
+      courseAction$ = this.courseDataService.updateCourse(this.course as Course);
     } else {
       courseAction$ = this.courseDataService.createCourse(this.course as Course);
     }

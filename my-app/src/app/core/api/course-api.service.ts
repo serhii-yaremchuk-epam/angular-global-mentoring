@@ -10,7 +10,7 @@ import { CoursesListParams } from '../../shared/models/courses-list-params.model
 export class CourseApiService extends CoreApiService {
 
   getCourses(params: CoursesListParams): Observable<Course[]> {
-    return this.http.get<Course[]>(this.baseUrl + 'courses', {
+    return this.http.get<Course[]>(`${this.baseUrl}courses`, {
       params: params as any
     })
   }

@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { LoaderService } from '../../services/loader.service';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {LoaderService} from '../../services/loader.service';
 
 @Component({
   selector: 'cp-loader',
@@ -7,11 +7,7 @@ import { LoaderService } from '../../services/loader.service';
   styleUrls: ['./loader.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoaderComponent implements OnInit {
-
-  constructor(public loaderService: LoaderService) { }
-
-  ngOnInit(): void {
+export class LoaderComponent {
+  constructor(public loaderService: LoaderService) {
   }
-
 }

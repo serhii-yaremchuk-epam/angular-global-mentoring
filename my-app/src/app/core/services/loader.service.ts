@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ReplaySubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
-  loaderActive$ = new Subject<boolean>();
+  loaderActive$ = new ReplaySubject<boolean>();
 
   show() {
     this.loaderActive$.next(true);

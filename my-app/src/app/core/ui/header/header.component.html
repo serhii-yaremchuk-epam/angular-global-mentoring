@@ -1,4 +1,4 @@
-<header class="header layout-padding vertical-align--center justify--space-between">
+<header class="header layout-padding vertical-align--center justify--space-between" *ngIf="user$ | async as user">
   <div class="header__logo">
     <cp-fake-logo></cp-fake-logo>
   </div>
