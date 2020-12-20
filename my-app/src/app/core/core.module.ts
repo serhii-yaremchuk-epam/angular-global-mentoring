@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.compon
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
+import { LoaderComponent } from './ui/loader/loader.component';
 
 
 @NgModule({
@@ -19,13 +20,15 @@ import { RequestInterceptor } from './interceptors/request.interceptor';
     FakeLogoComponent,
     BreadcrumbsComponent,
     LoginPageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoaderComponent
   ],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    BreadcrumbsComponent
-  ],
+    exports: [
+        HeaderComponent,
+        FooterComponent,
+        BreadcrumbsComponent,
+        LoaderComponent
+    ],
   imports: [
     CommonModule,
     RouterModule,

@@ -2,13 +2,10 @@
   <div class="courses-page__header justify--space-between">
     <div class="courses-page-search">
       <input [(ngModel)]="searchQuery"
+             (keyup)="onTypeSearch()"
              class="courses-page-search__input"
              type="text"
              placeholder="Type to search">
-      <button (click)="onFind()"
-              class="courses-page-search__button custom-button custom-button--color-green">
-        Search
-      </button>
     </div>
     <a [routerLink]="'/courses/new'" class="courses-page__add-button custom-button custom-button--color-blue">
       <i class="material-icons">add_circle_outline</i>
