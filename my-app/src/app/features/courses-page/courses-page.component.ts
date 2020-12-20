@@ -26,6 +26,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject();
 
   constructor(private courseDataService: CourseDataService) {
+    this.refreshList = this.refreshList.bind(this);
   }
 
   ngOnInit(): void {
@@ -68,7 +69,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   onDelete(course: Course) {
     if (confirm('Do you really want to delete this course?')) {
-      this.courseDataService.removeCourse(course.id as string).subscribe(this.refreshList.bind(this));
+      this.courseDataService.removeCourse(course.id as string).subscribe(this.refreshList);
     }
   }
 
