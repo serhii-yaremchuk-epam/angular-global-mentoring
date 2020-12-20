@@ -8,14 +8,14 @@ import { User } from '../../shared/models/user.model';
 })
 export class AuthApiService extends CoreApiService {
   login(login: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(this.baseUrl + 'auth/login', {
+    return this.http.post<{ token: string }>(`${this.baseUrl}auth/login`, {
       login,
       password
     })
   }
 
   getUserInfo(token: string): Observable<User> {
-    return this.http.post<User>(this.baseUrl + 'auth/userinfo', {
+    return this.http.post<User>(`${this.baseUrl}auth/userinfo`, {
       token,
     })
   }
