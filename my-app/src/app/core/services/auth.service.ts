@@ -2,23 +2,29 @@ import { Injectable } from '@angular/core';
 import { User } from '../../shared/models/user.model';
 import { AUTH_TOKEN_KEY, AUTH_USER_KEY } from '../../shared/constants/auth.constants';
 import { Router } from '@angular/router';
+import { AuthApiService } from '../api/auth-api.service';
+import { Observable } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authApi: AuthApiService) { }
 
-  login(): void {
-    const fakeUser: User = {
-      firstName: 'Fake',
-      lastName: 'User',
-      id: '1'
-    };
+  get token(): string {
+    return localStorage.getItem(AUTH_TOKEN_KEY) as string;
+  }
 
-    localStorage.setItem(AUTH_TOKEN_KEY, 'fakeToken');
-    localStorage.setItem(AUTH_USER_KEY, JSON.stringify(fakeUser));
-    this.router.navigate(['']);
+  login(login: string, password: string): void {
+    this.authApi.login(login, password).pipe(
+      mergeMap(({token}) => {
+        localStorage.setItem(AUTH_TOKEN_KEY, token);
+        return this.storeUserInfo();
+      })
+    ).subscribe(() => {
+      this.router.navigate([''])
+    });
   }
 
   logout(): void {
@@ -33,5 +39,13 @@ export class AuthService {
 
   getUserInfo(): User {
     return JSON.parse(localStorage.getItem(AUTH_USER_KEY) as string);
+  }
+
+  private storeUserInfo(): Observable<any> {
+    return this.authApi.getUserInfo(this.token).pipe(
+      tap((user) => {
+        localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+      })
+    );
   }
 }

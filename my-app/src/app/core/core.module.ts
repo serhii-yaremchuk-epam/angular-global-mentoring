@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './ui/footer/footer.component';
 import { LoginPageComponent } from './ui/login-page/login-page.component';
 import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.component';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { RequestInterceptor } from './interceptors/request.interceptor';
 
 
 @NgModule({
@@ -25,7 +28,16 @@ import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.compon
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    HttpClientModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
   ]
 })
 export class CoreModule {

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'cp-form-date',
@@ -7,5 +7,10 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormDateComponent {
-  @Input() date?: Date;
+  @Input() date!: Date;
+  @Output() formDateChange = new EventEmitter<string>();
+
+  onChange() {
+    this.formDateChange.emit(this.date.toString());
+  }
 }

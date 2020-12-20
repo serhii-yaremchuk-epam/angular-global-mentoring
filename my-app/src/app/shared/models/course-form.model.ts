@@ -1,7 +1,7 @@
 export interface CourseFormModel {
   id?: string,
-  title: string,
+  name: string,
   description: string,
-  duration: number,
-  creationDate?: Date,
+  length: number,
+  date: Date,
 }
