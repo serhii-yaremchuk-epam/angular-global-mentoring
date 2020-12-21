@@ -4,8 +4,10 @@ import { map, takeUntil } from 'rxjs/operators';
 import { CourseDataService } from '../courses-page/course-data.service';
 import { Course } from '../../shared/models/course.model';
 import { Subject } from 'rxjs';
-import { BreadcrumbsService } from '../../core/services/breadcrumbs.service';
 import { CourseFormModel } from '../../shared/models/course-form.model';
+import { BreadcrumbsService } from '../../core/services/breadcrumbs.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducer';
 
 @Component({
   selector: 'cp-course-form-page',
@@ -24,10 +26,12 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private courseDataService: CourseDataService,
     private breadcrumbsService: BreadcrumbsService,
-    private cd: ChangeDetectorRef) {
+    private cd: ChangeDetectorRef,
+    private store: Store<AppState>) {
   }
 
   ngOnInit() {
+    this.selectCurrentCourse();
     this.initMode();
     this.route.paramMap
       .pipe(
@@ -37,6 +41,20 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(this.initMode.bind(this));
+  }
+
+  private selectCurrentCourse() {
+    this.store.select('courses', 'current')
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(course => {
+        if (!course) {
+          return;
+        }
+
+        this.course = {...course};
+        this.breadcrumbsService.setLastLabel(this.course.name);
+        this.cd.markForCheck();
+      });
   }
 
   private initMode(id?: string | null) {
@@ -49,11 +67,7 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
 
   private initEditMode(id: string) {
     this.isEditMode = true;
-    this.courseDataService.getCourseById(id).subscribe(course => {
-      this.course = course;
-      this.breadcrumbsService.setLastLabel(this.course.name);
-      this.cd.markForCheck();
-    });
+    this.courseDataService.loadCourseById(id);
   }
 
   private initCreateMode() {
@@ -71,16 +85,11 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    let courseAction$;
     if (this.isEditMode) {
-      courseAction$ = this.courseDataService.updateCourse(this.course as Course);
+      this.courseDataService.updateCourse(this.course as Course);
     } else {
-      courseAction$ = this.courseDataService.createCourse(this.course as Course);
+      this.courseDataService.createCourse(this.course as Course);
     }
-
-    courseAction$.subscribe(course => {
-      this.router.navigate(['/courses']);
-    })
   }
 
   onFormDateChange(date: string) {

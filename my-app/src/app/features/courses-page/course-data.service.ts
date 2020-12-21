@@ -3,32 +3,50 @@ import { Course } from '../../shared/models/course.model';
 import { CourseApiService } from '../../core/api/course-api.service';
 import { Observable } from 'rxjs';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
+import { Store } from '@ngrx/store';
+import { CourseCreated, CourseLoaded, CourseRemoved, CoursesLoaded, CourseUpdated, MoreCoursesLoaded } from '../../store/courses/courses.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseDataService {
-  constructor(private courseApi: CourseApiService) {
+  constructor(private courseApi: CourseApiService, private store: Store) {
   }
 
-  getList(params: CoursesListParams): Observable<Course[]> {
-    return this.courseApi.getCourses(params);
+  loadList(params: CoursesListParams): void {
+    this.courseApi.getCourses(params).subscribe(courses => {
+      this.store.dispatch(CoursesLoaded({courses}));
+    });
   }
 
-  createCourse(course: Course): Observable<Course> {
-    return this.courseApi.createCourse(course);
+  loadMore(params: CoursesListParams): void {
+    this.courseApi.getCourses(params).subscribe(courses => {
+      this.store.dispatch(MoreCoursesLoaded({courses}));
+    });
   }
 
-  getCourseById(id: string): Observable<Course> {
-    return this.courseApi.getById(id);
+  createCourse(course: Course): void {
+    this.courseApi.createCourse(course).subscribe(() => {
+      this.store.dispatch(CourseCreated({course}));
+    });
   }
 
-  updateCourse(course: Course) {
-    return this.courseApi.updateCourse(course.id, course);
+  loadCourseById(id: string): void {
+    this.courseApi.getById(id).subscribe(course => {
+      this.store.dispatch(CourseLoaded({course}));
+    });
   }
 
-  removeCourse(id: string) {
-    return this.courseApi.removeCourse(id);
+  updateCourse(course: Course): void {
+    this.courseApi.updateCourse(course.id, course).subscribe(() => {
+      this.store.dispatch(CourseUpdated({course}));
+    });
+  }
+
+  removeCourse(id: string): void {
+    this.courseApi.removeCourse(id).subscribe(() => {
+      this.store.dispatch(CourseRemoved({id: +id}))
+    });
   }
 
 }

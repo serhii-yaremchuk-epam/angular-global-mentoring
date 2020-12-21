@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Store } from '@ngrx/store';
+import { LoginStart } from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'cp-login-page',
@@ -12,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   email!: string;
   password!: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private store: Store) { }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
@@ -25,6 +27,9 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.email, this.password);
+    this.store.dispatch(LoginStart({
+      email: this.email,
+      password: this.password
+    }));
   }
 }

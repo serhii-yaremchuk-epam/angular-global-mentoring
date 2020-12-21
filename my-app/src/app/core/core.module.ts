@@ -23,12 +23,12 @@ import { LoaderComponent } from './ui/loader/loader.component';
     PageNotFoundComponent,
     LoaderComponent
   ],
-    exports: [
-        HeaderComponent,
-        FooterComponent,
-        BreadcrumbsComponent,
-        LoaderComponent
-    ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    BreadcrumbsComponent,
+    LoaderComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
