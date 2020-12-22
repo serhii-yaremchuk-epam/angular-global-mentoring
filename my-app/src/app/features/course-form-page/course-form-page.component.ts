@@ -8,6 +8,8 @@ import { CourseFormModel } from '../../shared/models/course-form.model';
 import { BreadcrumbsService } from '../../core/services/breadcrumbs.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Author } from '../../shared/models/author.model';
 
 @Component({
   selector: 'cp-course-form-page',
@@ -18,6 +20,8 @@ import { AppState } from '../../store/app.reducer';
 export class CourseFormPageComponent implements OnInit, OnDestroy {
   isEditMode = false;
   course!: CourseFormModel | Course;
+  authors: Author[] = [];
+  form!: FormGroup;
 
   private unsubscribe = new Subject();
 
@@ -31,7 +35,8 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.selectCurrentCourse();
+    this.initForm();
+    this.selectRequiredData();
     this.initMode();
     this.route.paramMap
       .pipe(
@@ -41,9 +46,21 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(this.initMode.bind(this));
+
+    this.courseDataService.loadAuthors();
   }
 
-  private selectCurrentCourse() {
+  private initForm() {
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+      length: new FormControl(0, Validators.required),
+      date: new FormControl(new Date(), Validators.required),
+      authors: new FormControl([]),
+    });
+  }
+
+  private selectRequiredData() {
     this.store.select('courses', 'current')
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(course => {
@@ -51,8 +68,16 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.course = {...course};
-        this.breadcrumbsService.setLastLabel(this.course.name);
+        this.course = course;
+        this.form.patchValue(course);
+        this.breadcrumbsService.setLastLabel(course.name);
+        this.cd.markForCheck();
+      });
+
+    this.store.select('courses', 'authors')
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe(authors => {
+        this.authors = authors || [];
         this.cd.markForCheck();
       });
   }
@@ -72,12 +97,6 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
 
   private initCreateMode() {
     this.isEditMode = false;
-    this.course = {
-      name: '',
-      description: '',
-      length: 0,
-      date: new Date(),
-    };
   }
 
   onCancel() {
@@ -85,19 +104,17 @@ export class CourseFormPageComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-    if (this.isEditMode) {
-      this.courseDataService.updateCourse(this.course as Course);
-    } else {
-      this.courseDataService.createCourse(this.course as Course);
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      return;
     }
-  }
 
-  onFormDateChange(date: string) {
-    this.course.date = new Date(date);
-  }
-
-  onDurationChange(length: number) {
-    this.course.length = length;
+    const course = this.form.value as Course;
+    if (this.isEditMode) {
+      this.courseDataService.updateCourse({...course, ...{id: this.course.id}} as Course);
+    } else {
+      this.courseDataService.createCourse(course as Course);
+    }
   }
 
   ngOnDestroy() {

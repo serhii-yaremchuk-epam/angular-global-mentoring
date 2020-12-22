@@ -1,19 +1,25 @@
 <div class="login-page vertical-align--center justify--center">
-  <div class="card login-page__form login-form">
+  <div class="card login-page__form login-form" [formGroup]="form">
     <h2 class="login-form__title">Login</h2>
     <div class="login-form__control">
       <label for="email-input">E-mail</label>
-      <input [(ngModel)]="email"
+      <input formControlName="email"
              id="email-input"
              type="text"
              placeholder="Enter e-mail">
+      <span *ngIf="form.get('email')?.touched && form.get('email')?.errors?.required" class="color--error">
+        The field is required
+      </span>
     </div>
     <div class="login-form__control">
       <label for="password-input">Password</label>
-      <input [(ngModel)]="password"
+      <input formControlName="password"
              id="password-input"
              type="text"
              placeholder="Enter password">
+      <span *ngIf="form.get('password')?.touched && form.get('password')?.errors?.required" class="color--error">
+        The field is required
+      </span>
     </div>
     <div class="login-form__actions login-form-actions justify--space-between vertical-align--center">
       <a class="login-form-actions__forgot-password" href="">Forgot password</a>
