@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cp-form-date',
@@ -22,7 +23,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 export class FormDateComponent implements ControlValueAccessor, Validator {
   date!: string;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef, private translateService: TranslateService) {
   }
 
   writeValue(value?: string) {
@@ -58,7 +59,7 @@ export class FormDateComponent implements ControlValueAccessor, Validator {
     const isValid = this.date && dateRegex.test(this.date.toString());
 
     return (isValid) ? null : {
-      dateFormat: 'Date format should be mm/dd/yyyy'
+      dateFormat: 'COURSE_FORM_PAGE.Date_format_error'
     };
   }
 }

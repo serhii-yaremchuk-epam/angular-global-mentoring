@@ -1,54 +1,56 @@
 <div class="card form-page">
-  <h2 *ngIf="isEditMode" class="form-page__title">Edit course #{{course?.id}}</h2>
-  <h2 *ngIf="!isEditMode" class="form-page__title">New course</h2>
+  <h2 *ngIf="isEditMode" class="form-page__title">
+    {{ 'COURSE_FORM_PAGE.Edit_course_title' | translate:{id: course?.id} }}
+  </h2>
+  <h2 *ngIf="!isEditMode" class="form-page__title">{{ 'COURSE_FORM_PAGE.New_course' | translate }}</h2>
   <form [formGroup]="form">
     <div class="form-item">
-      <label for="name">Title</label>
-      <input id="name" name="name" placeholder="Text input" formControlName="name">
+      <label for="name">{{ 'COURSE_FORM_PAGE.Title' | translate }}</label>
+      <input id="name" name="name" placeholder="{{ 'COURSE_FORM_PAGE.Text_input' | translate }}" formControlName="name">
       <span *ngIf="form.get('name')?.errors?.maxlength" class="color--error">
-        Max length 50 symbols
+        {{ 'COURSE_FORM_PAGE.Max_length_error' | translate:{number: 50} }}
       </span>
       <span *ngIf="form.get('name')?.touched && form.get('name')?.errors?.required" class="color--error">
-        The field is required
+        {{ 'SHARED.Required_error' | translate }}
       </span>
     </div>
     <div class="form-item">
-      <label for="description">Description</label>
-      <textarea id="description" name="description" placeholder="Add description" formControlName="description"></textarea>
+      <label for="description">{{ 'COURSE_FORM_PAGE.Description' | translate }}</label>
+      <textarea id="description" name="description" placeholder="{{ 'COURSE_FORM_PAGE.Add_description' | translate }}" formControlName="description"></textarea>
       <span *ngIf="form.get('description')?.errors?.maxlength" class="color--error">
-        Max length 500 symbols
+        {{ 'COURSE_FORM_PAGE.Max_length_error' | translate:{number: 500} }}
       </span>
       <span *ngIf="form.get('description')?.touched && form.get('description')?.errors?.required" class="color--error">
-        The field is required
+        {{ 'SHARED.Required_error' | translate }}
       </span>
     </div>
     <div class="form-item form-item--small">
       <cp-form-date formControlName="date"></cp-form-date>
       <span *ngIf="form.get('date')?.errors?.dateFormat" class="color--error">
-        {{form.get('date')?.errors?.dateFormat}}
+        {{ form.get('date')?.errors?.dateFormat | translate:{format: 'mm/dd/yyyy'} }}
       </span>
       <span *ngIf="form.get('date')?.touched && form.get('date')?.errors?.required" class="color--error">
-        The field is required
+        {{ 'SHARED.Required_error' | translate }}
       </span>
     </div>
     <div class="form-item form-item--medium">
       <cp-form-duration formControlName="length"></cp-form-duration>
       <span *ngIf="form.get('length')?.errors?.positiveNumber" class="color--error">
-        {{form.get('length')?.errors?.positiveNumber}}
+        {{ form.get('length')?.errors?.positiveNumber | translate }}
       </span>
       <span *ngIf="form.get('length')?.touched && form.get('length')?.errors?.required" class="color--error">
-        The field is required
+        {{ 'SHARED.Required_error' | translate }}
       </span>
     </div>
     <div class="form-item form-item--medium">
       <cp-form-authors formControlName="authors" [all]="authors"></cp-form-authors>
       <span *ngIf="form.get('authors')?.errors?.authorsCount" class="color--error">
-        {{form.get('authors')?.errors?.authorsCount}}
+        {{ form.get('authors')?.errors?.authorsCount | translate}}
       </span>
     </div>
     <div class="form-actions justify--end">
-      <button class="custom-button custom-button--color-gray" (click)="onCancel()">Cancel</button>
-      <button class="custom-button custom-button--color-green" [disabled]="form.invalid" (click)="onSave()">Save</button>
+      <button class="custom-button custom-button--color-gray" (click)="onCancel()">{{ 'COURSE_FORM_PAGE.Cancel' | translate }}</button>
+      <button class="custom-button custom-button--color-green" [disabled]="form.invalid" (click)="onSave()">{{ 'COURSE_FORM_PAGE.Save' | translate }}</button>
     </div>
   </form>
 </div>

@@ -1,0 +1,45 @@
+{
+  "SHARED": {
+    "App_name": "Відео курси",
+    "Courses_breadcrumb": "Курси",
+    "New_course_breadcrumb": "Новий курс",
+    "Log_off": "Вийти",
+    "Required_error": "Це поле обов'язкове",
+    "Page_not_found": "Сторінку не знайдено"
+  },
+  "LOGIN": {
+    "Login":  "Логін",
+    "Email": "E-mail",
+    "Password": "Пароль",
+    "Enter_email": "Введіть e-mail",
+    "Enter_password": "Введіть пароль",
+    "Forgot_password": "Відновити пароль"
+  },
+  "COURSES_PAGE": {
+    "Type_to_search": "Введіть текст для пошуку",
+    "Add_course": "Створити курс",
+    "No_data": "Курси відсутні. Після створення курс буде відображений у списку",
+    "Load_more": "Загрузити ще",
+    "Edit": "Редагувати",
+    "Delete": "Видалити"
+  },
+  "COURSE_FORM_PAGE": {
+    "Edit_course_title": "Редагування курсу #{{id}}",
+    "Title": "Назва",
+    "Text_input": "Введіть текст",
+    "New_course": "Новий курс",
+    "Max_length_error": "Максимальне число символів: {{number}}",
+    "Description": "Опис",
+    "Save": "Зберегти",
+    "Cancel": "Відмінити",
+    "Authors": "Автори",
+    "Type_to_search": "Введіть текст для пошуку",
+    "Selected_authors": "Обрані автори",
+    "Date": "Дата",
+    "Duration": "Термін",
+    "Add_description": "Додати опис",
+    "Authors_count_error": "Оберіть хоча б 1 автора",
+    "Date_format_error": "Дата має бути в наступному форматі: {{format}}",
+    "Positive_number_error": "Введіть числове позитивне значення"
+  }
+}

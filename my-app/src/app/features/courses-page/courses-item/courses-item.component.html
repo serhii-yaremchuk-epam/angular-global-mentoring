@@ -22,11 +22,11 @@
     <div class="course-item-content__actions course-item-actions justify--space-between">
       <a class="course-item-actions__button custom-button custom-button--color-blue custom-button--size-s"
          [routerLink]="[course.id]">
-        <i class="material-icons">edit</i>Edit
+        <i class="material-icons">edit</i>{{ 'COURSES_PAGE.Edit' | translate }}
       </a>
       <button (click)="onDelete()"
               class="course-item__delete-button course-item-actions__button custom-button custom-button--color-blue custom-button--size-s">
-        <i class="material-icons">delete</i>Delete
+        <i class="material-icons">delete</i>{{ 'COURSES_PAGE.Delete' | translate }}
       </button>
     </div>
   </div>

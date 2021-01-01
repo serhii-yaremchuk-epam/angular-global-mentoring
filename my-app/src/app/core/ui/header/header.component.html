@@ -3,12 +3,18 @@
     <cp-fake-logo></cp-fake-logo>
   </div>
   <div class="header__user-buttons vertical-align--center" *ngIf="authService.isAuthenticated()">
+    <div [formGroup]="languageForm">
+      <select formControlName="language">
+        <option value="en">English</option>
+        <option value="uk">Ukrainian</option>
+      </select>
+    </div>
     <div class="custom-button custom-button--unclickable">
       <i class="material-icons">person</i>
       <span>{{user?.name?.first}} {{user?.name?.last}}</span>
     </div>
     <button class="custom-button" (click)="authService.logout()">
-      <i class="material-icons">exit_to_app</i>Log off
+      <i class="material-icons">exit_to_app</i>{{ 'SHARED.Log_off' | translate }}
     </button>
   </div>
 </header>

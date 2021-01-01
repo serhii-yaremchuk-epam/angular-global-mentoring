@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../../shared/models/course.model';
 import { CourseApiService } from '../../core/api/course-api.service';
-import { Observable } from 'rxjs';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
 import { Store } from '@ngrx/store';
 import {

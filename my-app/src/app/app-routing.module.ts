@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     data: {
-      breadcrumb: 'Courses'
+      breadcrumb: 'SHARED.Courses_breadcrumb'
     },
     children: [
       {
@@ -27,7 +27,7 @@ const routes: Routes = [
         path: 'new',
         component: CourseFormPageComponent,
         data: {
-          breadcrumb: 'New Course'
+          breadcrumb: 'SHARED.New_course_breadcrumb'
         },
       },
       {

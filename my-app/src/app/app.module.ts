@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/auth/auth.effects';
 import { appReducer } from './store/app.reducer';
 import { CourseEffects } from './store/courses/course.effects';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,10 +28,36 @@ import { CourseEffects } from './store/courses/course.effects';
     CourseFormPageModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([AuthEffects, CourseEffects]),
-    StoreModule.forRoot(appReducer)
+    StoreModule.forRoot(appReducer),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      useDefaultLang: false,
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+    translate.setDefaultLang('en');
+    return translate.use('en').toPromise();
+  };
 }

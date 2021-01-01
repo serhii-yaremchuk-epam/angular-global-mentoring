@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { LoaderComponent } from './ui/loader/loader.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { LoaderComponent } from './ui/loader/loader.component';
     RouterModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
   ],
   providers: [
     {

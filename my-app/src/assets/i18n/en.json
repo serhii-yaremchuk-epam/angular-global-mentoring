@@ -1,0 +1,45 @@
+{
+  "SHARED": {
+    "App_name": "Video course",
+    "Courses_breadcrumb": "Courses",
+    "New_course_breadcrumb": "New Course",
+    "Log_off": "Log off",
+    "Required_error": "The field is required",
+    "Page_not_found": "PAGE NOT FOUND"
+  },
+  "LOGIN": {
+    "Login":  "Login",
+    "Email": "E-mail",
+    "Password": "Password",
+    "Enter_email": "Enter e-mail",
+    "Enter_password": "Enter password",
+    "Forgot_password": "Forgot password"
+  },
+  "COURSES_PAGE": {
+    "Type_to_search": "Type to search",
+    "Add_course": "Add course",
+    "No_data": "No data. Fill free to add new course",
+    "Load_more": "Load more",
+    "Edit": "Edit",
+    "Delete": "Delete"
+  },
+  "COURSE_FORM_PAGE": {
+    "Edit_course_title": "Edit course #{{id}}",
+    "Title": "Title",
+    "Text_input": "Text input",
+    "New_course": "New course",
+    "Max_length_error": "Max length {{number}} symbols",
+    "Description": "Description",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "Authors": "Authors",
+    "Type_to_search": "Type to search author",
+    "Selected_authors": "Selected authors",
+    "Date": "Date",
+    "Duration": "Duration",
+    "Add_description": "Add description",
+    "Authors_count_error": "Should be at least one author selected",
+    "Date_format_error": "Date format should be {{format}}",
+    "Positive_number_error": "Only positive number is allowed"
+  }
+}

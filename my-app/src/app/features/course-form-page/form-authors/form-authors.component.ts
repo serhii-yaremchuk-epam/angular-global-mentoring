@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Author } from '../../../shared/models/author.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cp-form-authors',
@@ -24,6 +25,9 @@ export class FormAuthorsComponent implements ControlValueAccessor, Validator {
   @Input() all: Author[] = [];
   authors: Author[] = [];
   searchQuery = ''
+
+  constructor(private translateService: TranslateService) {
+  }
 
   get listToSelect(): Author[] {
     const selectedIds = this.authors.map(author => author.id);
@@ -63,7 +67,7 @@ export class FormAuthorsComponent implements ControlValueAccessor, Validator {
 
   validate() {
     return (this.authors && this.authors.length) ? null : {
-      authorsCount: 'Should be at least one author selected'
+      authorsCount: 'COURSE_FORM_PAGE.Authors_count_error'
     };
   }
 
