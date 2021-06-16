@@ -23,6 +23,8 @@
     "@angular/router": "~10.1.5",
     "@ngrx/effects": "^10.1.1",
     "@ngrx/store": "^10.1.1",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "material-icons": "^0.3.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

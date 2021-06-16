@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cp-form-duration',
@@ -22,7 +23,7 @@ import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } fro
 export class FormDurationComponent implements ControlValueAccessor, Validator {
   duration?: number;
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef, private translateService: TranslateService) {
   }
 
   writeValue(value?: number) {
@@ -51,7 +52,7 @@ export class FormDurationComponent implements ControlValueAccessor, Validator {
     const isValid = this.duration && positiveNumberRegex.test(this.duration.toString());
 
     return (isValid) ? null : {
-      positiveNumber: 'Only positive number is allowed'
+      positiveNumber: 'COURSE_FORM_PAGE.Positive_number_error'
     };
   }
 }

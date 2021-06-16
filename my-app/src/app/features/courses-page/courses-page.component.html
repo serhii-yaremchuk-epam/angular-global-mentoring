@@ -4,11 +4,11 @@
       <input formControlName="searchQuery"
              class="courses-page-search__input"
              type="text"
-             placeholder="Type to search">
+             placeholder="{{ 'COURSES_PAGE.Type_to_search' | translate }}">
     </div>
     <a [routerLink]="'/courses/new'" class="courses-page__add-button custom-button custom-button--color-blue">
       <i class="material-icons">add_circle_outline</i>
-      <span>Add course</span>
+      <span>{{ 'COURSES_PAGE.Add_course' | translate }}</span>
     </a>
   </div>
   <div class="courses-page__items-container" *ngIf="courses?.length; else noResults">
@@ -22,12 +22,12 @@
   </div>
   <ng-template #noResults>
     <div class="courses-page__no-results card justify--center vertical-align--center">
-      No data. Fill free to add new course
+      {{ 'COURSES_PAGE.No_data' | translate }}
     </div>
   </ng-template>
   <div *ngIf="!isLastPage"
        class="courses-page__load-more card justify--center vertical-align--center cursor--pointer"
        (click)="onLoadMore()">
-    Load more
+    {{ 'COURSES_PAGE.Load_more' | translate }}
   </div>
 </div>

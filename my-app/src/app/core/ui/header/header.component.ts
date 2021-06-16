@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducer';
 import { LoadUser } from '../../../store/auth/auth.actions';
+import { FormControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'cp-header',
@@ -12,14 +14,21 @@ import { LoadUser } from '../../../store/auth/auth.actions';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  public user$!: Observable<User | undefined>;
+  user$!: Observable<User | undefined>;
+  languageForm = new FormGroup({
+    language: new FormControl('en')
+  });
 
-  constructor(public authService: AuthService, private store: Store<AppState>) {
+  constructor(public authService: AuthService, private store: Store<AppState>, private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
     this.user$ = this.store.select('auth', 'user');
     this.store.dispatch(LoadUser());
+
+    (this.languageForm.get('language') as FormControl).valueChanges.subscribe(language => {
+      this.translateService.use(language);
+    })
   }
 
 }

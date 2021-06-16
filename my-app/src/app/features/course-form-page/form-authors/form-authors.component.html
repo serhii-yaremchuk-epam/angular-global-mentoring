@@ -1,9 +1,9 @@
 <ng-container>
-  <label for="authors">Authors</label>
+  <label for="authors">{{ 'COURSE_FORM_PAGE.Authors' | translate }}</label>
   <div class="justify--space-between vertical-align--center">
     <input id="authors"
            list="authors-list"
-           placeholder="Type to search author"
+           placeholder="{{ 'COURSE_FORM_PAGE.Type_to_search' | translate }}"
            (change)="onChange($event)"
            [(ngModel)]="searchQuery">
     <datalist id="authors-list">
@@ -14,7 +14,7 @@
     </datalist>
   </div>
   <div class="selected-items">
-    <h4>Selected authors: </h4>
+    <h4>{{ 'COURSE_FORM_PAGE.Selected_authors' | translate }}: </h4>
     <ul>
       <li *ngFor="let author of authors">
         {{author.name}} {{author.lastName}}

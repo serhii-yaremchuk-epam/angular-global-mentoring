@@ -1,5 +1,5 @@
 <ng-container>
-  <label for="duration">Duration</label>
+  <label for="duration">{{ 'COURSE_FORM_PAGE.Duration' | translate }}</label>
   <div class="justify--space-between vertical-align--center">
     <input id="duration" type="number" name="duration" (change)="onChange()" [(ngModel)]="duration">
     <span *ngIf="duration">{{duration | duration}}</span>
