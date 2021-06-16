@@ -3,7 +3,9 @@ import { Course } from '../../shared/models/course.model';
 import { CourseDataService } from './course-data.service';
 import { Subject } from 'rxjs';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../store/app.reducer';
 
 @Component({
   selector: 'cp-courses-page',
@@ -25,11 +27,18 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
   private listParams: CoursesListParams = this.initialListParams;
   private unsubscribe = new Subject();
 
-  constructor(private courseDataService: CourseDataService) {
+  constructor(private courseDataService: CourseDataService, private store: Store<AppState>) {
     this.refreshList = this.refreshList.bind(this);
   }
 
   ngOnInit(): void {
+    this.store.select('courses', 'all')
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((courses = []) => {
+        this.isLastPage = courses.length <= this.courses.length;
+        this.courses = courses;
+      });
+
     this.refreshList();
     this.searchChanged$.pipe(
       filter(searchQuery => {
@@ -39,7 +48,7 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
       distinctUntilChanged(),
     ).subscribe(() => {
       this.search();
-    })
+    });
   }
 
   search() {
@@ -48,28 +57,18 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
 
   onLoadMore() {
     this.listParams.start = (this.listParams.start as number) + (this.listParams.count as number);
-    this.getList().subscribe(courses => {
-      this.isLastPage = courses.length < (this.listParams.count as number);
-      this.courses = this.courses.concat(courses);
-    });
-  }
-
-  private getList() {
-    return this.courseDataService.getList(this.listParams);
+    this.courseDataService.loadMore(this.listParams)
   }
 
   private refreshList(params: CoursesListParams = {}) {
     this.isLastPage = false;
     this.listParams = {...this.initialListParams, ...params};
-
-    this.getList().subscribe(courses => {
-      this.courses = courses;
-    });
+    this.courseDataService.loadList(this.listParams);
   }
 
   onDelete(course: Course) {
     if (confirm('Do you really want to delete this course?')) {
-      this.courseDataService.removeCourse(course.id as string).subscribe(this.refreshList);
+      this.courseDataService.removeCourse(course.id as string);
     }
   }
 
