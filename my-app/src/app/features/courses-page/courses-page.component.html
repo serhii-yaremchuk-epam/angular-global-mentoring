@@ -1,8 +1,7 @@
 <div class="courses-page">
   <div class="courses-page__header justify--space-between">
-    <div class="courses-page-search">
-      <input [(ngModel)]="searchQuery"
-             (keyup)="onTypeSearch()"
+    <div class="courses-page-search" [formGroup]="searchForm">
+      <input formControlName="searchQuery"
              class="courses-page-search__input"
              type="text"
              placeholder="Type to search">

@@ -1,0 +1,25 @@
+<ng-container>
+  <label for="authors">Authors</label>
+  <div class="justify--space-between vertical-align--center">
+    <input id="authors"
+           list="authors-list"
+           placeholder="Type to search author"
+           (change)="onChange($event)"
+           [(ngModel)]="searchQuery">
+    <datalist id="authors-list">
+      <option *ngFor="let item of listToSelect"
+              [value]="item.id"
+              [label]="item.name">
+      </option>
+    </datalist>
+  </div>
+  <div class="selected-items">
+    <h4>Selected authors: </h4>
+    <ul>
+      <li *ngFor="let author of authors">
+        {{author.name}} {{author.lastName}}
+        <span class="cursor--pointer" (click)="onRemove(author.id)"><i class="material-icons">delete</i></span>
+      </li>
+    </ul>
+  </div>
+</ng-container>

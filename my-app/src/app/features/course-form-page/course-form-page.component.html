@@ -1,26 +1,54 @@
 <div class="card form-page">
-  <h2 *ngIf="isEditMode" class="form-page__title">Edit course #{{course.id}}</h2>
+  <h2 *ngIf="isEditMode" class="form-page__title">Edit course #{{course?.id}}</h2>
   <h2 *ngIf="!isEditMode" class="form-page__title">New course</h2>
-  <form>
+  <form [formGroup]="form">
     <div class="form-item">
-      <label for="title">Title</label>
-      <input id="title" name="title" placeholder="Text input"
-             [(ngModel)]="course.name">
+      <label for="name">Title</label>
+      <input id="name" name="name" placeholder="Text input" formControlName="name">
+      <span *ngIf="form.get('name')?.errors?.maxlength" class="color--error">
+        Max length 50 symbols
+      </span>
+      <span *ngIf="form.get('name')?.touched && form.get('name')?.errors?.required" class="color--error">
+        The field is required
+      </span>
     </div>
     <div class="form-item">
       <label for="description">Description</label>
-      <textarea id="description" name="description" placeholder="Add description"
-                [(ngModel)]="course.description"></textarea>
+      <textarea id="description" name="description" placeholder="Add description" formControlName="description"></textarea>
+      <span *ngIf="form.get('description')?.errors?.maxlength" class="color--error">
+        Max length 500 symbols
+      </span>
+      <span *ngIf="form.get('description')?.touched && form.get('description')?.errors?.required" class="color--error">
+        The field is required
+      </span>
     </div>
     <div class="form-item form-item--small">
-      <cp-form-date (formDateChange)="onFormDateChange($event)" [date]="course.date"></cp-form-date>
+      <cp-form-date formControlName="date"></cp-form-date>
+      <span *ngIf="form.get('date')?.errors?.dateFormat" class="color--error">
+        {{form.get('date')?.errors?.dateFormat}}
+      </span>
+      <span *ngIf="form.get('date')?.touched && form.get('date')?.errors?.required" class="color--error">
+        The field is required
+      </span>
     </div>
     <div class="form-item form-item--medium">
-      <cp-form-duration (durationChange)="onDurationChange($event)" [duration]="course.length"></cp-form-duration>
+      <cp-form-duration formControlName="length"></cp-form-duration>
+      <span *ngIf="form.get('length')?.errors?.positiveNumber" class="color--error">
+        {{form.get('length')?.errors?.positiveNumber}}
+      </span>
+      <span *ngIf="form.get('length')?.touched && form.get('length')?.errors?.required" class="color--error">
+        The field is required
+      </span>
+    </div>
+    <div class="form-item form-item--medium">
+      <cp-form-authors formControlName="authors" [all]="authors"></cp-form-authors>
+      <span *ngIf="form.get('authors')?.errors?.authorsCount" class="color--error">
+        {{form.get('authors')?.errors?.authorsCount}}
+      </span>
     </div>
     <div class="form-actions justify--end">
       <button class="custom-button custom-button--color-gray" (click)="onCancel()">Cancel</button>
-      <button class="custom-button custom-button--color-green" (click)="onSave()">Save</button>
+      <button class="custom-button custom-button--color-green" [disabled]="form.invalid" (click)="onSave()">Save</button>
     </div>
   </form>
 </div>

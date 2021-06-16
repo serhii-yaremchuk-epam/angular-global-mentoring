@@ -3,6 +3,7 @@ import { CoreApiService } from './core-api.service';
 import { Observable } from 'rxjs';
 import { Course } from '../../shared/models/course.model';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
+import { Author } from '../../shared/models/author.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class CourseApiService extends CoreApiService {
     return this.http.get<Course[]>(`${this.baseUrl}courses`, {
       params: params as any
     })
+  }
+
+  getAuthors(): Observable<Author[]> {
+    return this.http.get<Author[]>(`${this.baseUrl}authors`)
   }
 
   removeCourse(id: string): Observable<any> {

@@ -6,6 +6,7 @@ import { CoursesListParams } from '../../shared/models/courses-list-params.model
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'cp-courses-page',
@@ -13,11 +14,11 @@ import { AppState } from '../../store/app.reducer';
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit, OnDestroy {
-  searchQuery = '';
+  searchForm: FormGroup = new FormGroup({
+    searchQuery: new FormControl('')
+  });
   courses: Course[] = [];
   isLastPage = false;
-
-  private searchChanged$ = new Subject<string>();
 
   private readonly initialListParams: CoursesListParams = {
     start: 0,
@@ -40,19 +41,19 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
       });
 
     this.refreshList();
-    this.searchChanged$.pipe(
+    this.searchForm.get('searchQuery')?.valueChanges.pipe(
       filter(searchQuery => {
         return searchQuery.length >= 3 || searchQuery.length === 0;
       }),
       debounceTime(250),
       distinctUntilChanged(),
-    ).subscribe(() => {
-      this.search();
+    ).subscribe((searchQuery) => {
+      this.search(searchQuery);
     });
   }
 
-  search() {
-    this.refreshList({textFragment: this.searchQuery});
+  search(searchQuery: string) {
+    this.refreshList({textFragment: searchQuery});
   }
 
   onLoadMore() {
@@ -72,14 +73,9 @@ export class CoursesPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  onTypeSearch() {
-    this.searchChanged$.next(this.searchQuery);
-  }
-
   ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.searchChanged$.complete();
   }
 
 }

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './ui/footer/footer.component';
 import { LoginPageComponent } from './ui/login-page/login-page.component';
 import { PageNotFoundComponent } from './ui/page-not-found/page-not-found.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './interceptors/request.interceptor';
 import { LoaderComponent } from './ui/loader/loader.component';
@@ -33,7 +33,8 @@ import { LoaderComponent } from './ui/loader/loader.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

@@ -4,7 +4,15 @@ import { CourseApiService } from '../../core/api/course-api.service';
 import { Observable } from 'rxjs';
 import { CoursesListParams } from '../../shared/models/courses-list-params.model';
 import { Store } from '@ngrx/store';
-import { CourseCreated, CourseLoaded, CourseRemoved, CoursesLoaded, CourseUpdated, MoreCoursesLoaded } from '../../store/courses/courses.actions';
+import {
+  AuthorsLoaded,
+  CourseCreated,
+  CourseLoaded,
+  CourseRemoved,
+  CoursesLoaded,
+  CourseUpdated,
+  MoreCoursesLoaded
+} from '../../store/courses/courses.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +42,12 @@ export class CourseDataService {
   loadCourseById(id: string): void {
     this.courseApi.getById(id).subscribe(course => {
       this.store.dispatch(CourseLoaded({course}));
+    });
+  }
+
+  loadAuthors(): void {
+    this.courseApi.getAuthors().subscribe(authors => {
+      this.store.dispatch(AuthorsLoaded({authors}));
     });
   }
 

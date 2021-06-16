@@ -1,15 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import { Course } from '../../shared/models/course.model';
-import { CourseLoaded, CourseRemoved, CoursesLoaded, CourseUpdated, MoreCoursesLoaded } from './courses.actions';
+import { AuthorsLoaded, CourseLoaded, CourseRemoved, CoursesLoaded, CourseUpdated, MoreCoursesLoaded } from './courses.actions';
+import { Author } from '../../shared/models/author.model';
 
 export interface CoursesState {
   all: Course[],
-  current?: Course
+  current?: Course,
+  authors?: Author[],
 }
 
 const initialState: CoursesState = {
   all: [],
-  current: undefined
+  current: undefined,
+  authors: [],
 }
 
 export const coursesReducer = createReducer(
@@ -42,6 +45,12 @@ export const coursesReducer = createReducer(
     return {
       ...state,
       ...{current: course}
+    }
+  }),
+  on(AuthorsLoaded, (state, {authors}) => {
+    return {
+      ...state,
+      ...{authors}
     }
   })
 )

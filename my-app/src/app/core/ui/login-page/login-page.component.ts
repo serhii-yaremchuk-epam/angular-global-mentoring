@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Store } from '@ngrx/store';
 import { LoginStart } from '../../../store/auth/auth.actions';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'cp-login-page',
@@ -11,8 +12,10 @@ import { LoginStart } from '../../../store/auth/auth.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent implements OnInit {
-  email!: string;
-  password!: string;
+  form: FormGroup = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  })
 
   constructor(private authService: AuthService, private router: Router, private store: Store) { }
 
@@ -23,13 +26,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    if (!this.email || !this.password) {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
 
-    this.store.dispatch(LoginStart({
-      email: this.email,
-      password: this.password
-    }));
+    this.store.dispatch(LoginStart(this.form.value));
   }
 }
